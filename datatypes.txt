@@ -1,0 +1,46 @@
+Numbers
+Defining a number in JavaScript is actually pretty simple. The Number data type includes any positive or negative integer, as well as decimals. Entering a number into the console will return it right back to you.
+String concatenation
+Strings are a collection of characters enclosed inside double or single quotes. You can use strings to represent data like sentences, names, addresses, and more. Did you know you can even add strings together? In JavaScript, this is called concatenating. Concatenating two strings together is actually pretty simple!
+
+"Hello," + " New York City"
+Returns: "Hello, New York City"
+
+
+
+Indexing
+Did you know that you can access individual characters in a string? To access an individual character, you can use the character's location in the string, called its index. Just put the index of the character inside square brackets (starting with [0] as the first character) immediately after the string. For example:
+
+
+
+Escaping characters
+In JavaScript, you use the backslash to escape other characters.
+
+Escaping a character tells JavaScript to ignore the character's special meaning and just use the literal value of the character. This is helpful for characters that have special meanings like in our previous example with quotes "…".
+
+Because quotes are used to signify the beginning and end of a string, you can use the backslash character to escape the quotes in order to access the literal quote character.
+
+"The man whispered, \"please speak to me.\""
+Returns: The man whispered, "please speak to me."
+
+This guarantees that the JavaScript engine doesn’t misinterpret the string and result in an error.
+
+
+The last two characters listed in the table, newline \n and tab \t, are unique because they add additional whitespace to your Strings. A newline character will add a line break and a tab character will advance your line to the next tab stop.
+
+"Up up\n\tdown down"
+Returns:
+Up up
+ down down
+
+
+Summary:
+dATA TYPES IN js
+Numbers
+boolean
+string
+null
+undefined
+bigint
+symbols
+object
