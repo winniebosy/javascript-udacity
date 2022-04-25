@@ -1,0 +1,364 @@
+Arrays that can hold multiple data values.
+Arrays
+An array is useful because it stores multiple values into a single, organized data structure. You can define a new array by listing values separated with commas between square brackets [].
+
+// creates a `donuts` array with three strings
+var donuts = ["glazed", "powdered", "jelly"];
+
+But strings aren’t the only type of data you can store in an array. You can also store numbers, booleans… and really anything!
+
+// creates a `mixedData` array with mixed data types
+var mixedData = ["abcd", 1, true, undefined, null, "all the things"];
+You can even store an array in an array to create a nested array!
+// creates a `arraysInArrays` array with three arrays
+var arraysInArrays = [[1, 2, 3], ["Julia", "James"], [true, false, true, false]];
+
+Accessing Array Elements;
+-aRRAYS HAVE Elements to signify individual pieces of data.
+-Accessing elements in  an array is through indexing. you start at 0.
+
+
+
+Indexing
+Remember that elements in an array are indexed starting at the position 0. To access an element in an array, use the name of the array immediately followed by square brackets containing the index of the value you want to access.
+
+var donuts = ["glazed", "powdered", "sprinkled"];
+console.log(donuts[0]); // "glazed" is the first element in the `donuts` array
+Prints: "glazed"
+
+One thing to be aware of is if you try to access an element at an index that does not exist, a value of undefined will be returned back.
+
+console.log(donuts[3]); // the fourth element in `donuts` array does not exist!
+
+
+Finally, if you want to change the value of an element in array, you can do so by setting it equal to a new value.
+
+donuts[1] = "glazed cruller"; // changes the second element in the `donuts` array to "glazed cruller"
+console.log(donuts[1]); 
+
+
+TIP: The 1st element of any array has an index of 0.
+
+
+
+Starting with this array of prices, change the prices of the 1st, 3rd, and 7th elements in the array.
+var prices = [1.23, 48.11, 90.11, 8.50, 9.99, 1.00, 1.10, 67.00]
+\solution;
+
+for (var index = 0; index<prices.length; index++){
+    //change the value of first element
+    if(index===0){
+        prices[index]=11;
+    }
+    //change the value of third element
+    else if(index===2){
+        prices[index]=33;
+    }
+    //change the value of seventh element
+    else if(index===6){
+        prices[index]=77;
+    }
+}
+console.log(prices);
+
+
+methods- special predefined functions that a data structure can use.
+
+
+
+
+Array.length
+You can find the length of an array by using its length property.
+
+var donuts = ["glazed", "powdered", "sprinkled"];
+console.log(donuts.length);
+Prints: 3
+
+
+
+Push methods
+Push
+You can use the push() method to add elements to the end of an array.
+Notice, with the push() method you need to pass the value of the element you want to add to the end of the array. Also, the push() method returns the length of the array after an element has been added.
+var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller", "cinnamon sugar", "sprinkled"];
+donuts.push("powdered");
+donuts.push("nuts");
+
+
+Example 
+donuts;
+(8) ['glazed', 'chocolate frosted', 'Boston creme', 'glazed cruller', 'cinnamon sugar', 'sprinkled', 'powdered', 'nuts']
+
+
+
+
+Pop
+Alternatively, you can use the pop() method to remove elements from the end of an array.
+
+var donuts = ["glazed", "chocolate frosted", "Boston creme", "glazed cruller", "cinnamon sugar", "sprinkled", "powdered"];
+
+donuts.pop(); // pops "powdered" off the end of the `donuts` array
+donuts.pop(); // pops "sprinkled" off the end of the `donuts` array
+donuts.pop(); // pops "cinnamon sugar" off the end of the `donuts`
+
+
+
+
+Splice
+splice() is another handy method that allows you to add and remove elements from anywhere within an array.
+While push() and pop() limit you to adding and removing elements from the end of an array, splice() lets you specify the index location to add new elements, as well as the number of elements you'd like to delete (if any).
+Following is the syntax of splice() method: arrayName.splice(arg1, arg2, item1, ....., itemX); where,
+
+arg1 = Mandatory argument. Specifies the starting index position to add/remove items. You can use a negative value to specify the position from the end of the array e.g., -1 specifies the last element.
+
+arg2 = Optional argument. Specifies the count of elements to be removed. If set to 0, no items will be removed.
+
+item1, ....., itemX are the items to be added at index position arg1
+
+splice() method returns the item(s) that were removed.
+ NB: IT REMOVES AN ELEMENT BEFORE THE SPECIFIED INDEX
+Example;
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// inserts at index 1
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// replaces 1 element at index 4
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+
+
+ExampleIn the Harry Potter novels, children attending the Hogwarts School of Witchcraft and Wizardry belong to one of four houses: Gryffindor, Hufflepuff, Ravenclaw, or Slytherin. Each year, the houses assemble a Quidditch team of seven players to compete for the coveted Quidditch Cup.
+Create a function called hasEnoughPlayers() that takes the team array as an argument and returns true or false depending on if the array has at least seven players.
+
+
+var team = ["Oliver Wood", "Angelina Johnson", "Katie Bell", "Alicia Spinnet", "George Weasley", "Fred Weasley", "Harry Potter"];
+
+function hasEnoughPlayers(arrayInstance) {
+    if (arrayInstance.length >= 7)
+        return true; // true is a boolean value. Do not return a string "true"
+    else 
+        return false; // false is also a boolean value. Do not return a string "false"
+}
+console.log(hasEnoughPlayers(team));
+
+
+
+Example of Array methods
+var sortMe = [2, 1, 10, 7, 6];
+sortMe.sort();
+(5) [1, 10, 2, 6, 7].. using sort method
+
+
+shift() will remove the first element from an array.
+splice() can be used if you specify the index of the first element, and indicate that you want to delete 1 element. These two methods modify arrays
+
+
+
+
+
+
+Array Loops
+Once the data is in the array, you want to be able to efficiently access and manipulate each element in the array without writing repetitive code for each element.
+
+For instance, if this was our original donuts array:
+
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+and we decided to make all the same donut types, but only sell them as donut holes instead, we could write the following code:
+
+donuts[0] += " hole";
+donuts[1] += " hole";
+donuts[2] += " hole";
+donuts array: ["jelly donut hole", "chocolate donut hole", "glazed donut hole"]
+
+But remember, you have another powerful tool at your disposal, loops!
+
+To loop through an array, you can use a variable to represent the index in the array, and then loop over that index to perform whatever manipulations your heart desires.
+
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+
+// the variable `i` is used to step through each element in the array
+for (var i = 0; i < donuts.length; i++) {
+    donuts[i] += " hole";
+    donuts[i] = donuts[i].toUpperCase();
+}
+donuts array: ["JELLY DONUT HOLE", "CHOCOLATE DONUT HOLE", "GLAZED DONUT HOLE"]
+
+In this example, the variable i is being used to represent the index of the array. As i is incremented, you are stepping over each element in the array starting from 0 until donuts.length - 1 (donuts.length is out of bounds).
+
+Arrays have a set of special methods to help you iterate over and perform operations on collections of data. You can view the MDN Documentation list of Array methods here, but a couple big ones to know are the forEach() and map() methods.
+
+The forEach() method gives you an alternative way to iterate over an array, and manipulate each element in the array with an inline function expression.
+
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+
+donuts.forEach(function(donut) {
+  donut += " hole";
+  donut = donut.toUpperCase();
+  console.log(donut);
+});
+Prints:
+JELLY DONUT HOLE
+CHOCOLATE DONUT HOLE
+GLAZED DONUT HOLE
+
+Notice that the forEach() method iterates over the array without the need of an explicitly defined index. In the example above, donut corresponds to the element in the array itself. This is different from a for or while loop where an index is used to access each element in the array:
+
+for (var i = 0; i < donuts.length; i++) {
+  donuts[i] += " hole";
+  donuts[i] = donuts[i].toUpperCase();
+  console.log(donuts[i]);
+}
+Parameters
+The function that you pass to the forEach() method can take up to three parameters. In the video, these are called element, index, and array, but you can call them whatever you like.
+
+The forEach() method will call this function once for each element in the array (hence the name forEach.) Each time, it will call the function with different arguments. The element parameter will get the value of the array element. The index parameter will get the index of the element (starting with zero). The array parameter will get a reference to the whole array, which is handy if you want to modify the elements.
+
+Here's another example:
+
+words = ["cat", "in", "hat"];
+words.forEach(function(word, num, all) {
+  console.log("Word " + num + " in " + all.toString() + " is " + word);
+});
+Prints:
+Word 0 in cat,in,hat is cat
+Word 1 in cat,in,hat is in
+Word 2 in cat,in,hat is hat
+
+
+
+
+Example of looping over array for each
+
+Use the array's forEach() method to loop over the following array and add 100 to each of the values if the value is divisible by 3.
+
+var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 14
+
+
+// You can test your code with a smaller array first
+// var test = [12, 29, 11, 3];
+
+// Write your code here
+test.forEach(function(item, index){
+    if(item%3===0){
+        // The commented statements below would not be able to change the value of item
+        // because the `item` is a COPY of actual element, while actual is test[index]
+        // item = item + 100;
+        // console.log("The updated element is "+item+" and actual is "+test[index]);
+        test[index]=test[index]+100;
+    }
+    //else 
+    //    console.log("Element "+item+" is not divisible by 3");
+});
+console.log(test);
+
+
+
+MAP ARRAY method
+
+Using forEach() will not be useful if you want to permanently modify the original array. forEach() always returns undefined. However, creating a new array from an existing array is simple with the powerful map() method.
+
+With the map() method, you can take an array, perform some operation on each element of the array, and return a new array.
+
+var donuts = ["jelly donut", "chocolate donut", "glazed donut"];
+
+var improvedDonuts = donuts.map(function(donut) {
+  donut += " hole";
+  donut = donut.toUpperCase();
+  return donut;
+});
+donuts array: ["jelly donut", "chocolate donut", "glazed donut"]
+improvedDonuts array: ["JELLY DONUT HOLE", "CHOCOLATE DONUT HOLE", "GLAZED DONUT HOLE"]
+
+Oh man, did you just see that? The map() method accepts one argument, a function that will be used to manipulate each element in the array. In the above example, we used a function expression to pass that function into map(). This function is taking in one argument, donut which corresponds to each element in the donuts array. You no longer need to iterate over the indices anymore. map() does all that work for you.
+
+
+
+NESTED aRRAYS
+You could use an array of arrays that has the name of each donut associated with its position in the box.
+
+Here's an example:
+
+var donutBox = [
+  ["glazed", "chocolate glazed", "cinnamon"],
+  ["powdered", "sprinkled", "glazed cruller"],
+  ["chocolate cruller", "Boston creme", "creme de leche"]
+];
+If you wanted to loop over the donut box and display each donut (along with its position in the box!) you would start with writing a for loop to loop over each row of the box of donuts:
+
+var donutBox = [
+  ["glazed", "chocolate glazed", "cinnamon"],
+  ["powdered", "sprinkled", "glazed cruller"],
+  ["chocolate cruller", "Boston creme", "creme de leche"]
+];
+
+// here, donutBox.length refers to the number of rows of donuts
+for (var row = 0; row < donutBox.length; row++) {
+  console.log(donutBox[row]);
+}
+Prints:
+["glazed", "chocolate glazed", "cinnamon"]
+["powdered", "sprinkled", "glazed cruller"]
+["chocolate cruller", "Boston creme", "creme de leche"]
+
+Since each row is an array of donuts, you next need to set up an inner-loop to loop over each cell in the arrays.
+
+for (var row = 0; row < donutBox.length; row++) {
+  // here, donutBox[row].length refers to the length of the donut array currently being looped over
+  for (var column = 0; column < donutBox[row].length; column++) {
+    console.log(donutBox[row][column]);
+  }
+}
+Prints:
+"glazed"
+"chocolate glazed"
+"cinnamon"
+"powdered"
+"sprinkled"
+"glazed cruller"
+"chocolate cruller"
+"Boston creme"
+"creme de leche"
+
+
+NB ALWAYS THINK OF NESTED ARRAYS AS A GRID SYSTEM WITH ROWS AND COLUMS IN IT. WHERE ROWS REPRESENT THE OUTER LAYERS AND COLUMNS REPRESENTS THE INNER LAYER.
+
+
+
+
+eXAMPLE OF looping inside nested loops;
+Directions:
+Use a nested for loop to take the numbers array below and replace all of the values that are divisible by 2 (even numbers) with the string "even" and all other numbers with the string "odd".
+
+var numbers = [
+    [243, 12, 23, 12, 45, 45, 78, 66, 223, 3],
+    [34, 2, 1, 553, 23, 4, 66, 23, 4, 55],
+    [67, 56, 45, 553, 44, 55, 5, 428, 452, 3],
+    [12, 31, 55, 445, 79, 44, 674, 224, 4, 21],
+    [4, 2, 3, 52, 13, 51, 44, 1, 67, 5],
+    [5, 65, 4, 5, 5, 6, 5, 43, 23, 4424],
+    [74, 532, 6, 7, 35, 17, 89, 43, 43, 66],
+    [53, 6, 89, 10, 23, 52, 111, 44, 109, 80],
+    [67, 6, 53, 537, 2, 168, 16, 2, 1, 8],
+    [76, 7, 9, 6, 3, 73, 77, 100, 56, 100]
+];
+Your Code:
+
+// Let i represents a sub-array
+for(var i=0; i<numbers.length; i++){
+
+    // Let j represents the length of a sub-array 
+    for(var j=0; j<numbers[i].length; j++){
+        if(numbers[i][j]%2===0)
+            numbers[i][j]="even";
+        else
+            numbers[i][j]="odd";
+    }
+}
+
+
+
+solution
