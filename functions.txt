@@ -1,0 +1,450 @@
+function to reverse a string example
+
+function reverseString(name) {
+    var reversed ="";
+    for(var i = name.length-1; i>=0; i--){
+        reversed += name[i];
+    }
+    return reversed;
+}
+reverseString('Bosibori');
+
+'irobisoB'
+
+
+
+
+function findAverage(x, y) {
+  var answer = (x + y) / 2;
+  return answer;
+}
+
+var avg = findAverage(5, 9);
+
+
+
+x and y are parameters! They are defined in the function declaration. The values 5, and 9 are passed in as function arguments.
+
+
+
+
+How to declare a function
+Functions allow you to package up lines of code that you can use (and often reuse) in your programs.
+
+Sometimes they take parameters like the pizza button from the beginning of this lesson. reheatPizza() had one parameter: the number of slices.
+
+function reheatPizza(numSlices) {
+  // code that figures out reheat settings!
+}
+The reverseString() function that you saw also had one parameter: the string to be reversed.
+
+function reverseString(reverseMe) {
+  // code to reverse a string!
+}
+In both cases, the parameter is listed as a variable after the function name, inside the parentheses. And, if there were multiple parameters, you would just separate them with commas.
+
+function doubleGreeting(name, otherName) {
+  // code to greet two people!
+}
+But, you can also have functions that don't have any parameters. Instead, they just package up some code and perform some task. In this case, you would just leave the parentheses empty. Take this one for example. Here's a simple function that just prints out "Hello!".
+
+// accepts no parameters! parentheses are empty
+function sayHello() {
+  var message = "Hello!"
+  console.log(message);
+}
+If you tried pasting any of the functions above into the JavaScript console, you probably didn't notice much happen. In fact, you probably saw undefined returned back to you. undefined is the default return value on the console when nothing is explicitly returned using the special return keyword.
+
+Return statements
+In the sayHello() function above, a value is printed to the console with console.log, but not explicitly returned with a return statement. You can write a return statement by using the return keyword followed by the expression or value that you want to return.
+
+// declares the sayHello function
+function sayHello() {
+  var message = "Hello!"
+  return message; // returns value instead of printing it
+}
+How to run a function
+Now, to get your function to do something, you have to invoke or call the function using the function name, followed by parentheses with any arguments that are passed into it. Functions are like machines. You can build the machine, but it won't do anything unless you also turn it on. Here's how you would call the sayHello() function from before, and then use the return value to print to the console:
+
+// declares the sayHello function
+function sayHello() {
+  var message = "Hello!"
+  return message; // returns value instead of printing it
+}
+
+// function returns "Hello!" and console.log prints the return value
+console.log(sayHello());
+Prints: "Hello!"
+
+Parameters vs. Arguments
+At first, it can be a bit tricky to know when something is either a parameter or an argument. The key difference is in where they show up in the code. A parameter is always going to be a variable name and appears in the function declaration. On the other hand, an argument is always going to be a value (i.e. any of the JavaScript data types - a number, a string, a boolean, etc.) and will always appear in the code when the function is called or invoked.
+
+
+
+
+
+What you've learned so far:
+Functions package up code so you can easily use (and reuse) a block of code. Parameters are variables that are used to store the data that's passed into a function for the function to use. Arguments are the actual data that's passed into a function when it is invoked:
+
+// x and y are parameters in this function declaration
+function add(x, y) {
+  // function body
+  // Here, `sum` variable has a scope within the function. 
+  // Such variables defined within a function are called Local variables
+  // You can try giving it another name
+  var sum = x + y;
+  return sum; // return statement
+}
+
+// 1 and 2 are passed into the function as arguments, 
+// and the result returned by the function is stored in a new variable `sum`
+// Here, `sum` is another variable, different from the one used inside the function
+var sum = add(1, 2);
+The function body is enclosed inside curly brackets:
+
+function add(x, y) {
+  // function body!
+}
+Return statements explicitly make your function return a value:
+
+return sum;
+You invoke or call a function to have it do something:
+
+add(1, 2);
+Returns: 3
+
+
+
+
+ite a function called laugh() that takes one parameter, num that represents the number of "ha"s to return.
+solution
+var sound = "" ; 
+function laugh(num) {
+    for (var x = 0 ; x < num ; x++) {
+        sound = sound + "ha" ;  
+    }
+    sound = sound +"!"; 
+    return sound; 
+}
+
+console.log(laugh(3)) ;
+
+
+
+
+Using Return Values
+Returning a value from a function is great, but what's the use of a return value if you're not going to use the value to do something?
+
+A function's return value can be stored in a variable or reused throughout your program as a function argument. Here, we have a function that adds two numbers together, and another function that divides a number by 2. We can find the average of 5 and 7 by using the add() function to add a pair of numbers together, and then by passing the sum of the two numbers add(5, 7) into the function divideByTwo() as an argument.
+
+And finally, we can even store the final answer in a variable called average and use the variable to perform even more calculations in more places!
+
+// returns the sum of two numbers
+function add(x, y) {
+  return x + y;
+}
+
+
+// returns the value of a number divided by 2
+function divideByTwo(num) {
+  return num / 2;
+}
+
+
+var sum = add(5, 7); // call the "add" function and store the returned value in the "sum" variable
+var average = divideByTwo(sum); // call the "divideByTwo" function and store the returned value in the "average" variable
+
+
+Another example of reusing functions
+function addTen(x) {
+  return x + 10;
+}
+
+function divideByThree(y) {
+  return y / 3;
+}
+
+var result = addTen(2);
+console.log(divideByThree(result));//4
+
+
+
+SCOPE OVERRIDING OR SHADOWING:
+clashing of both global and functional scope.
+var x = 1;
+
+function addTwo() {
+  x = x + 2;
+}
+
+addTwo();
+x = x + 1;
+console.log(x);//4
+The global variable x is assigned the value of 1.
+Then, the function addTwo() increments the variable by 2.
+Next, the variable is incremented by 1.
+Finally, it's printed out using console.log.
+
+
+
+
+var x = 1;
+
+function addTwo() {
+  var x = x + 2;
+}
+
+addTwo();
+x = x + 1;
+console.log(x);
+
+
+The global variable x is incremented by 1. Since the global variable's original value was 1, and it was incremented by 1, console.log will print out 2.
+
+
+
+The variable assignment inside the function addTwo() only has function scope, so its affect is not reflected outside the function
+
+
+
+
+HOISTING
+Before any javascript is executed all function declarations are hoisted to the top of their current scope.
+ie, declare the function first then call the function after writitng.
+
+
+example
+sayHi("Julia");
+
+function sayHi(name) {
+  console.log(greeting + " " + name);
+  var greeting;
+}
+Explanation: 
+The function declaration is hoisted to the top of its current scope, and inside the function, the greeting variable declaration is also hoisted to the top of its function scope.
+
+
+
+Example 2
+sayHi("Julia");
+
+function sayHi(name) {
+  console.log(greeting + " " + name);
+  var greeting = "Hello";
+}
+
+The variable declaration is hoisted to the top of current scope (the top of the function). Remember that the declaration is hoisted, not the assignment.
+
+
+What you've learned so far:
+JavaScript hoists function declarations and variable declarations to the top of the current scope.
+Variable assignments are not hoisted.
+Declare functions and variables at the top of your scripts, so the syntax and behavior are consistent with each other.
+
+
+Function to buid an triangle with asterics;
+function makeAst(length){
+    var line = "";
+    for(i = 1; i<=length; i++){
+        line += '*';
+        console.log(line);
+        
+    }
+    return line;
+}
+makeAst(3); // 
+*
+**
+***
+
+
+FUNCTION EXPRESSIONS
+When a function is stored inside a variable, it is called a functional expression.
+
+
+
+Once you know how to declare a function, a whole new set of possibilities will open up to you.
+
+For instance, remember how you can store anything you want in a variable? Well, in JavaScript, you can also store functions in variables. When a function is stored inside a variable it's called a function expression.
+
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+
+
+
+Function expressions and hoisting
+Deciding when to use a function expression and when to use a function declaration can depend on a few things, and you will see some ways to use them in the next section. But, one thing you'll want to be careful of is hoisting.
+
+All function declarations are hoisted and loaded before the script is actually run. Function expressions are not hoisted, since they involve variable assignment, and only variable declarations are hoisted. The function expression will not be loaded until the interpreter reaches it in the script.
+
+
+Functions as parameters
+Being able to store a function in a variable makes it really simple to pass the function into another function. A function that is passed into another function is called a callback. Let's say you had a helloCat() function, and you wanted it to return "Hello" followed by a string of "meows" like you had with catSays. Well, rather than redoing all of your hard work, you can make helloCat() accept a callback function, and pass in catSays.
+
+
+example
+// function expression catSays
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+
+// function declaration helloCat accepting a callback
+function helloCat(callbackFunc) {
+  return "Hello " + callbackFunc(3);
+}
+
+// pass in catSays as a callback function
+helloCat(catSays);
+
+
+
+Inline function expressions
+A function expression is when a function is assigned to a variable. And, in JavaScript, this can also happen when you pass a function inline as an argument to another function. Take the favoriteMovie example for instance:
+
+// Function expression that assigns the function displayFavorite 
+// to the variable favoriteMovie
+var favoriteMovie = function displayFavorite(movieName) {
+  console.log("My favorite movie is " + movieName);
+};
+
+// Function declaration that has two parameters: a function for displaying
+// a message, along with a name of a movie
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+
+// Call the movies function, pass in the favoriteMovie function and name of movie
+movies(favoriteMovie, "Finding Nemo");
+Returns: My favorite movie is Finding Nemo
+
+
+
+Returns: My favorite movie is Finding Nemo
+
+But you could have bypassed the first assignment of the function, by passing the function to the movies() function inline.
+
+// Function declaration that takes in two arguments: a function for displaying
+// a message, along with a name of a movie
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+
+// Call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+  console.log("My favorite movie is " + movieName);
+}, "Finding Nemo");
+Returns: My favorite movie is Finding Nemo
+
+
+
+
+
+Why use anonymous inline function expressions?
+Using an anonymous inline function expression might seem like a very not-useful thing at first. Why define a function that can only be used once and you can't even call it by name?
+
+Anonymous inline function expressions are often used with function callbacks that are probably not going to be reused elsewhere. Yes, you could store the function in a variable, give it a name, and pass it in like you saw in the examples above. However, when you know the function is not going to be reused, it could save you many lines of code to just define it inline.
+
+
+
+What you've learned so far:
+Function Expression: When a function is assigned to a variable. The function can be named, or anonymous. Use the variable name to call a function defined in a function expression.
+
+// anonymous function expression
+var doSomething = function(y) {
+  return y + 1;
+};
+// named function expression
+var doSomething = function addOne(y) {
+  return y + 1;
+};//6
+
+
+ou can even pass a function into another function inline. This pattern is commonly used in JavaScript, and can be helpful streamlining your code.
+
+// function declaration that takes in two arguments: a function for displaying
+// a message, along with a name of a movie
+function movies(messageFunction, name) {
+  messageFunction(name);
+}
+
+// call the movies function, pass in the function and name of movie
+movies(function displayFavorite(movieName) {
+  console.log("My favorite movie is " + movieName);
+}, "Finding Nemo");
+
+
+
+Write an anonymous function expression that stores a function in a variable called "laugh" and outputs the number of "ha"s that you pass in as an argument.
+
+laugh(3);
+
+// Declare an empty string
+var sound = "" ; 
+
+// An anonymous function expression stored in the variable `laugh`
+var laugh = function(num) {
+
+    //Iterate
+    for (var x = 0 ; x < num ; x++) {
+        sound = sound + "ha" ;  
+    }
+    sound = sound +"!"; 
+    return sound; 
+}
+
+// It is essential that the function must return a string
+console.log(laugh(3)) ;
+
+
+
+
+
+Write a named function expression that stores the function in a variable called cry and returns "boohoo!". Don't forget to call the function using the variable name, not the function name:
+
+
+
+var cry = function myFunction(){
+    var sound = "boohoo!";
+    return sound;
+    };
+
+// Call the function using the variable name, not the function name
+console.log(cry());
+
+
+
+
+
+
+
+Directions:
+Call the emotions() function so that it prints the output you see below, but instead of passing the laugh() function as an argument, pass an inline function expression instead.
+
+
+
+// emotions() function definition
+function emotions(myString, myFunc) {
+    console.log("I am " + myString + ", " + myFunc(2));
+}
+
+// Call the emotions() function with two arguments
+// Argument 1 - "happy" string
+// Argument 2 - an inline function expression
+emotions ("happy", function(num) {
+    var sound = ""; // Local variable
+    //Iterate
+    for (var i = 0 ; i < num ; i++) {
+        sound = sound + "ha" ;  
+    }
+    sound = sound +"!"; 
+    return sound; 
+});
