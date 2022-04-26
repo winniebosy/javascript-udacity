@@ -1,0 +1,7 @@
+dom structure
+So to reiterate the process, it's:
+
+characters
+tags
+tokens
+nod
