@@ -1,0 +1,430 @@
+Inner html is a property of an element
+An Element's Inner HTML
+
+Every element inherits properties and methods from the Element Interface (remember this from the previous lesson!). This means that every element has an .innerHTML property. This property, as it's rightly named, represents the markup of the element's content. We can use this property to:
+
+    get an element's (and all of its descendants!) HTML content
+    set an element's HTML content
+
+inner html often returhs DOMstrings
+
+
+
+An Element's Text Content
+
+So .innerHTML will get/set an element's HTML content. If we just want the text content, we can use the fantastically named .textContent property!
+
+The .textContent property will:
+
+    set the text content of an element and all its descendants
+    return the text content of an element and all its descendants
+
+
+
+We just saw that passing text that contains HTML characters to .textContent will not display the content as HTML. Instead, it will still display everything as text - even the HTML character
+
+
+
+As you saw, .innerText will get the visible text of the element. This is an important distinction! If CSS is used to hide any text inside that element, .innerText will not return that text, while .textContent will return it. And it's not just the hiding/showing nature of CSS that .innerText adheres to, .innerText will also honor changes to things like capitalization.
+
+The .textContent property has been a standard for quite a long time. Conversely, .innerText property is a relatively new addition to the HTML specification. It has been around for a while but was not fully supported by all browsers because it was not a part of the HTML specification.
+
+Between .textContent and .innerText, you probably want to use .textContent since that will return all of the text no matter what. Rarely will you actually want only the visible text.
+
+
+
+CREATING CONTENT USING js 
+Adding Content To The Page
+
+You may have noticed that using document.createElement() to create an element didn't actually add that newly created element anywhere on the page! Creating an element...just creates it. It doesn't add it to the DOM. Since the element isn't added to the DOM, it doesn't appear in the page (if you remember, the DOM is the parsed representation of the page). So, now that we can create brand new elements, we need to be able to add them to the DOM so that they'll show up on the page.
+
+We can use the .appendChild() method to add an element to the page! Before we see how this element works, let's quickly define the word "append". There are several different definitions of the word, but I like the wording of the Cambridge Dictionary's the best:
+
+    to add something to the end of a piece of writing
+
+    definition of the word "append" (source)
+
+Now, to use the .appendChild() method, it needs to be called on another element, not the document object!
+
+// create a brand new <span> element
+const newSpan = document.createElement('span');
+
+// select the first (main) heading of the page
+const mainHeading = document.querySelector('h1');
+
+// add the <span> element as the last child element of the main heading
+mainHeading.appendChild(newSpan);
+
+
+
+I like the Cambridge Dictionary's version because it clearly states how the content is added at the end. The .appendChild() method is called on one element, and is passed the element to append. The element that is about to be appended is added as the last child. So, in the example above, the <span> element will appear in the DOM as a child of the <h1>...but it will appear at the end, after all text and any other elements that might be in the <h1>.
+
+Here's the .appendChild() documentation page on MDN: [appendChild docs)(https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
+⚠️ .appendChild() Needs An Element! ⚠️
+
+This is stated above, but I wanted to call this out, specifically. When you're using the .appendChild() method, it must be called on an existing element. To be clear, you can't call this on the document object, so the following will result in an error:
+
+const newSpan = document.createElement('span');
+
+// causes an error
+document.appendChild(newSpan);
+
+Creating Text Nodes
+
+Just like you created new elements with the .createElement() method, you can also create new text nodes using the .createTextNode() method. Take a look at the following code that:
+
+    creates a paragraph element
+    creates a text node
+    appends the text node to the paragraph
+    appends the paragraph to the tag
+const myPara = document.createElement('p');
+
+myPara.textContent = 'I am the text for the paragraph!';
+document.body.appendChild(myPara);
+
+
+
+
+
+What happens after running this code?
+
+const mainHeading = document.querySelector('#main-heading');
+const otherHeading = document.querySelector('#other-heading');
+const excitedText = document.createElement('span');
+
+excitedText.textContent = '!!!';
+mainHeading.appendChild(excitedText);
+otherHeading.appendChild(excitedText);
+
+
+
+Solution: The .appendChild() method will move an element from its current position to the new position.
+
+
+
+
+Inserting HTML In Other Locations
+
+By definition, the .appendChild() method will add an element as the last child of the parent element. It's impossible to put it as the first child or anywhere else...it has to be the last child. Wouldn't it be nice if there were a little flexibility in where we could add the child element?
+
+Enter the .insertAdjacentHTML() method! The .insertAdjacentHTML() method has to be called with two arguments:
+
+    the location of the HTML
+    the HTML text that is going to be inserted
+
+The first argument to this method will let us insert the new HTML in one of four different locations
+
+    beforebegin – inserts the HTML text as a previous sibling
+    afterbegin – inserts the HTML text as the first child
+    beforeend – inserts the HTML text as the last child
+    afterend – inserts the HTML text as a following sibling
+
+A visual example works best, and MDN's documentation has a fantastic example that I'll modify slightly:
+
+
+
+Adding Multiple Styles At Once
+
+We've seen how the .style.<property> syntax will let us change just one piece of styling for an element. So if we wanted to set an element's color, background color, and font size, we'd have to use three separate lines of code:
+
+const mainHeading = document.querySelector('h1');
+
+mainHeading.style.color = 'blue';
+mainHeading.style.backgroundColor = 'orange';
+mainHeading.style.fontSize = '3.5em';
+
+...and that's just for setting three styles. Imagine if we needed 15 or 20 different styles! So the .style.property syntax is perfect for setting one style at a time, but it's not great for controlling multiple styles.
+
+Fortunately, we can use the .style.cssText property to set multiple CSS styles at once!
+
+const mainHeading = document.querySelector('h1');
+
+mainHeading.style.cssText = 'color: blue; background-color: orange; font-size: 3.5em';
+
+
+
+Setting An Element's Attributes
+
+Another way to set styles for an element is to bypass the .style.<property> and .style.cssText properties altogether and use the .setAttribute() method:
+
+const mainHeading = document.querySelector('h1');
+
+mainHeading.setAttribute('style', 'color: blue; background-color: orange; font-size: 3.5em;');
+
+Check out the documentation page for more information: style docs
+.setAttribute() Is Not Just For Styling
+
+The setAttribute() method is not just for styling page elements. You can use this method to set any attribute for an element. If you want to give an element an ID, you can do that!:
+
+const mainHeading = document.querySelector('h1');
+
+// add an ID to the heading's sibling element
+mainHeading.nextElementSibling.setAttribute('id', 'heading-sibling');
+
+// use the newly added ID to access that element
+document.querySelector('#heading-sibling').style.backgroundColor = 'red';
+
+The last two lines could've been combined into one to bypass setting an ID and just styling the element directly:
+
+mainHeading.nextElementSibling.style.backgroundColor = 'red';
+
+...but this was just to demonstrate that it's possible to set an attribute with JavaScript that affects the DOM which then can be used immediately
+
+
+
+Accessing an Element's Classes
+
+The first element property we'll look at is the .className property. This property returns a string of all of the element's classes. If an element has the following HTML:
+
+<h1 id="main-heading" class="ank-student jpk-modal">Learn Web Development at Udacity</h1>
+
+We could use .className to access the list of classes:
+
+const mainHeading = document.querySelector('#main-heading');
+
+// store the list of classes in a variable
+const listOfClasses = mainHeading.className;
+
+// logs out the string "ank-student jpk-modal"
+console.log(listOfClasses);
+
+The .className property returns a space-separated string of the classes. This isn't the most ideal format, unfortunately. We can, however, convert this space-separated string into an array using the JavaScript string method, .split():
+
+const arrayOfClasses = listOfClasses.split(' ');
+
+// logs out the array of strings ["ank-student", "jpk-modal"]
+console.log(arrayOfClasses);
+
+Now that we have an array of classes, we can do any data-intensive calculations:
+
+    use a for loop to loop through the list of class names
+    use .push() to add an item to the list
+    use .pop() to remove an item from the list
+
+.className is a property, so we can set its value just by assigning a string to the property:
+
+mainHeading.className = "im-the-new-class";
+
+The above code erases any classes that were originally in the element's class attribute and replaces it with the single class im-the-new-class.
+
+Since .className returns a string, it makes it hard to add or remove individual classes. As I mentioned earlier, we can convert the string to an array and then use different Array Methods to search for a class remove it from the list, and then update the .className with the remaining classes. However, we don't want to do all of that work! Let's use the newer .classList property.
+The .classList Property
+
+The .classList property is newer than the .className property, but is much nicer, check it out:
+
+<h1 id="main-heading" class="ank-student jpk-modal">Learn Web Development at Udacity</h1>
+
+const mainHeading = document.querySelector('#main-heading');
+
+// store the list of classes in a variable
+const listOfClasses = mainHeading.classList;
+
+// logs out ["ank-student", "jpk-modal"]
+console.log(listOfClasses);
+Toggling a non-existent class will add the new class to the list of classes.
+
+
+NB 
+My recommendation to you is that, out of the list of techniques you learned in this section, to use the .classList property more than any other. .classList is by far the most helpful property of the bunch, and it helps to keep your CSS styling out of your JavaScript code.
+
+
+
+Remember, the listener function must be the exact same function as the one used in the .addEventListener() call...not just an identical looking function. Let's look at a couple of examples.
+
+This code will successfully add and then remove an event listener:
+
+function myEventListeningFunction() {
+    console.log('howdy');
+}
+
+// adds a listener for clicks, to run the `myEventListeningFunction` function
+document.addEventListener('click', myEventListeningFunction);
+
+// immediately removes the click listener that should run the `myEventListeningFunction` function
+document.removeEventListener('click', myEventListeningFunction);
+
+Now, why does this work? It works because both .addEventListener() and .removeEventListener:
+
+    have the same target
+    have the same type
+    and pass the exact same listener
+
+Now let's look at an example that would not work (it does not remove the event listener):
+
+// adds a listener for clicks, to run the `myEventListeningFunction` function
+document.addEventListener('click', function myEventListeningFunction() {
+    console.log('howdy');
+});
+
+// immediately removes the click listener that should run the `myEventListeningFunction` function
+document.removeEventListener('click', function myEventListeningFunction() {
+    console.log('howdy');
+});
+
+This code does not successfully remove the event listener. Again, why does this not work?
+
+    both .addEventListener() and .removeEventListener have the same target
+    both .addEventListener() and .removeEventListener have the same type
+    .addEventListener() and .removeEventListener have their own distinct listener functions...they do not refer to the exact same function (this is the reason the event listener removal fails!)
+
+Two functions can look the same, but live in two different places in memory. Looks can be deceiving!
+
+Two functions can look the same, but live in two different places in memory. Looks can be deceiving!
+
+When we wrote
+
+function myEventListeningFunction() {
+    console.log('howdy');
+}
+
+a second time, we actually created a completely new function that was stored in a completely new location in memory! They may look the same and do the same thing, but that doesn't make them the same. Imagine a scenario where you see two houses that look exactly the same. While the houses might look the same, their addresses are different! That's exactly what just happened in our previous example.
+
+
+
+Recap
+
+We covered a number of important aspects of events and event listeners in this section! We looked at:
+
+    the phases of an event:
+        the capturing phase
+        the at target phase
+        the bubbling phase
+    the event object
+    prevent the default action with .preventDefault()
+
+
+
+
+
+Example of code
+const myCustomDiv = document.createElement('div');
+
+for (let i = 1; i <= 200; i++) {
+    const newElement = document.createElement('p');
+    newElement.textContent = 'This is paragraph number ' + i;
+
+    newElement.addEventListener('click', function respondToTheClick(evt) {
+        console.log('A paragraph was clicked.');
+    });
+
+    myCustomDiv.appendChild(newElement);
+}
+
+document.body.appendChild(myCustomDiv);  //appends to the body element.
+The above code has 200 event listeners.
+
+
+
+const  div = document.createElement('div');
+console.log(div);
+ for(i = 0; i <= 20; i++){
+ const para = document.createElement('p');
+  para.textContent = 'This is paragraph number: ' + i;
+   para.addEventListener('click', function respondToClick(){
+     console.log('A paragraph was clicked')
+   });
+   div.appendChild(para);
+ }
+document.body.appendChild(div);
+ Everytime a paragraph is clicked, the console will show a aprticualr paragraph was clicked.
+
+ We're creating a <div> element, attaching two hundred paragraph elements and attaching an event listener with a respondToTheClick function to each paragraph as we create it. There are a number of ways we could refactor this code. 
+
+
+
+
+ const myCustomDiv = document.createElement('div');
+
+function respondToTheClick() {
+    console.log('A paragraph was clicked.');
+}
+
+
+
+ For example, as of right now, we're creating two hundred different respondToTheClick functions (that all actually do the exact same thing!). We could extract this function and just reference the function instead of creating two hundred different functions:
+const myCustomDiv = document.createElement('div');
+
+function respondToTheClick() {
+    console.log('A paragraph was clicked.');
+}
+
+for (let i = 1; i <= 200; i++) {
+    const newElement = document.createElement('p');
+    newElement.textContent = 'This is paragraph number ' + i;
+
+    myCustomDiv.appendChild(newElement);
+}
+
+myCustomDiv.addEventListener('click', respondToTheClick);
+
+document.body.appendChild(myCustomDiv);
+
+The above code is properly refactored where we just use functions and event listeners for reference.
+Now the browser doesn't have to store in memory two hundred different event listeners and two hundred different listener functions. That's great for performance`!
+
+However, if you test the code above, you'll notice that we've lost access to the individual paragraphs. There's no way for us to target a specific paragraph element. So how do we combine this efficient code with the access to the individual paragraph items that we did before?
+
+
+
+
+
+Event Delegation
+
+Remember the event object that we looked at in the previous section? That's our ticket to getting back the original functionality!
+
+The event object has a .target property. This property references the target of the event. Remember the capturing, at target, and bubbling phases?...these are coming back into play here, too!
+
+Let's say that you click on a paragraph element. Here's roughly the process that happens:
+
+    a paragraph element is clicked
+    the event goes through the capturing phase
+    it reaches the target
+    it switches to the bubbling phase and starts going up the DOM tree
+    when it hits the <div> element, it runs the listener function
+    inside the listener function, event.target is the element that was clicked
+
+So event.target gives us direct access to the paragraph element that was clicked. Because we have access to the element directly, we can access its .textContent, modify its styles, update the classes it has - we can do anything we want to it!
+
+
+
+
+
+
+Example of creating div using js
+onst container = document.querySelector('.container');
+
+for (let i= 0; i <= 10; i++){
+ const div = document.createElement('div');
+   console.log(div);
+  div.textContent = " I am div " + i;
+  container.appendChild(div);
+}
+
+
+
+
+
+Using the DOMContentLoaded Event
+
+Because we now know about the DOMContentLoaded event, we can use it to keep our JS code in the <head>.
+
+Let's update the previous HTML code to include this event:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          document.querySelector('footer').style.backgroundColor = 'purple';
+      });
+    </script>
+
+Pretty cool, right?!? We have the JavaScript code in the <head> element, but it is now wrapped in an event listener for the DOMContentLoaded event. This will prevent the DOM-styling code from running when the browser gets to it. Then, when the DOM has been constructed, the event will fire and this code will run.
+
+If you're looking at somebody else's code, you may see that their code listens for the load event being used instead (e.g. document.onload(...)). load fires later than DOMContentLoaded -- load waits until all of the images, stylesheets, etc. have been loaded (everything referenced by the HTML.) Many older developers use load in place of DOMContentLoaded as the latter wasn't supported by the very earliest browsers. But if you need to detect when your code can run, DOMContentLoaded is generally the better choice.
+
+However, just because you can use the DOMContentLoaded event to write JavaScript code in the <head> that doesn't mean you should do this. Doing it this way, we have to write more code (all of the event listening stuff) and more code is usually not always the best way to do something. Instead, it would be better to move the code to the bottom of the HTML file just before the closing </body> tag.
+
+So when would you want to use this technique? Well, JavaScript code in the <head> will run before JavaScript code in the <body>, so if you do have JavaScript code that needs to run as soon as possible, then you could put that code in the <head> and wrap it in a DOMContentLoaded event listener. This way it will run as early as possible, but not too early that the DOM isn't ready for it.
+
